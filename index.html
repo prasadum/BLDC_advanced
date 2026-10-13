@@ -184,6 +184,23 @@ html.present.idle{cursor:none}
 #pbar output{font-family:var(--mono);font-weight:600;font-size:18px;min-width:70px;text-align:center}
 #pbar .sep{width:1px;align-self:stretch;background:var(--line);margin:0 4px}
 @media print{.ctrls,.pager,#pbar,nav.steps{display:none}}
+.srgrid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:860px){.srgrid{grid-template-columns:1fr}}
+#srSvg{display:block;width:100%;height:auto;background:var(--sunk);border-radius:4px}
+.srctl{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;align-items:center}
+.srctl .seg button{font-size:15px;padding:7px 14px}
+.srbar{display:flex;height:16px;border:1.5px solid var(--ink);border-radius:3px;overflow:hidden;margin-top:12px;background:var(--bg)}
+.srbar i{display:block;height:100%;transition:width .4s ease}
+#srBF{background:var(--ok)}#srBH{background:var(--r)}
+.srnote{font-size:14px;color:var(--muted);margin:10px 0 0;max-width:none}
+#srSvg .knob{cursor:pointer}
+.vfmot{display:grid;grid-template-columns:120px minmax(0,220px);gap:18px;align-items:center;justify-content:start;margin-top:12px}
+.vfmot .meters{margin:0;grid-column:1/-1}
+.t5ctl{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:center}
+.t5mot{display:grid;grid-template-columns:72px auto;gap:10px;align-items:center}
+@media (max-width:700px){.t5ctl{grid-template-columns:1fr}}
+.tbtns{display:inline-flex;gap:6px;flex-wrap:wrap}
+.lab .tag .btn.pz[aria-pressed="true"]{background:var(--ink);color:var(--surface)}
 .svgfig svg{display:block;width:100%;height:auto}
 .mfgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:10px 0 18px}
 .mf{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 16px;cursor:pointer;text-align:left;font:inherit;color:inherit;display:flex;flex-direction:column;gap:8px}
@@ -271,7 +288,10 @@ footer{font-size:13px;color:var(--muted);margin-top:30px}
           <tr><td>★★★★★</td><td class="num">3.1</td><td class="num">3.3</td><td class="num hi">3.5</td><td class="num">4.5</td><td class="num">5.0</td><td class="num new">5.6</td></tr>
         </tbody></table></div>
       <p class="small" data-i="t1src"></p>
-      
+      <div class="pair">
+        
+        
+      </div>
       <div class="note key"><strong data-i="remember"></strong><span data-i="t1note"></span></div>
     </div>
   </div>
@@ -291,11 +311,17 @@ footer{font-size:13px;color:var(--muted);margin-top:30px}
       </div>
       <div class="note key"><strong data-i="remember"></strong><span data-i="t2key"></span></div>
     </div>
-    
+    <div>
+      
+      
+    </div>
   </div>
   <h3 data-i="t2h2"></h3>
   <ul class="ticks"><li data-i="t2m1"></li><li data-i="t2m2"></li><li data-i="t2m3"></li><li data-i="t2m4"></li><li data-i="t2m5"></li></ul>
-  
+  <div class="pair">
+    
+    
+  </div>
   <h3 data-i="t2h3"></h3>
   <ul class="ticks bad"><li data-i="t2d1"></li><li data-i="t2d2"></li><li data-i="t2d3"></li><li data-i="t2d4"></li><li data-i="t2d5"></li><li data-i="t2d6"></li><li data-i="t2d7"></li><li data-i="t2d8"></li></ul>
 </section>
@@ -305,13 +331,40 @@ footer{font-size:13px;color:var(--muted);margin-top:30px}
   <div class="eyebrow" data-i="tab3"></div>
   <h2 data-i="t3h"></h2>
   <p class="lede" data-i="t3p1"></p>
+  <h3 data-i="t3h2"></h3>
+  <div class="lab srlab">
+    <div class="tag"><span data-i="tryit"></span><span data-i="srTag"></span></div>
+    <div class="srgrid">
+      <div><svg id="srSvg" viewBox="0 0 740 300" role="img" aria-label="Step regulator circuit"></svg></div>
+      <div><canvas id="srCv" width="420" height="300"></canvas>
+        <div class="legend"><span><i style="background:var(--accent);height:4px"></i><span data-i="lgMotor"></span></span><span><i style="background:var(--muted)"></i><span data-i="lgFull"></span></span><span><i style="background:var(--r)"></i><span data-i="lgLoad"></span></span></div></div>
+    </div>
+    <div class="srctl">
+      <div class="seg" id="srSteps" role="group"></div>
+      <div class="seg" id="srType" role="group"><button type="button" data-t="R" data-i="srRes"></button><button type="button" data-t="L" data-i="srChoke"></button></div>
+      <div class="seg"><button type="button" id="srAuto" data-i="srAuto"></button></div>
+    </div>
+    <div class="meters">
+      <div class="meter"><span data-i="mSeries"></span><b id="srMR">–</b></div>
+      <div class="meter"><span data-i="mVfan"></span><b id="srMV">–</b></div>
+      <div class="meter warn"><span data-i="mTq"></span><b id="srMT">–</b></div>
+      <div class="meter"><span data-i="mSpd"></span><b id="srMS">–</b></div>
+      <div class="meter warn"><span data-i="mHeat"></span><b id="srMH">–</b></div>
+      <div class="meter fine"><span data-i="mFanP"></span><b id="srMF">–</b></div>
+    </div>
+    <div class="srbar" aria-hidden="true"><i id="srBF"></i><i id="srBH"></i></div>
+    <div class="legend" style="margin-top:4px"><span><i style="background:var(--ok)"></i><span data-i="barFan"></span></span><span><i style="background:var(--r)"></i><span data-i="barHeat"></span></span><span id="srMains"></span></div>
+    <p class="srnote" data-i="srNote"></p>
+  </div>
+  <p data-i="t3p2"></p>
+  <h3 data-i="t3h3"></h3>
   <div class="cols">
     <div>
-      <h3 style="margin-top:0" data-i="t3h2"></h3>
-      <p data-i="t3p2"></p>
-      <h3 data-i="t3h3"></h3>
-      <p data-i="t3p3"></p>
-      
+      <p style="margin-top:0" data-i="t3p3"></p>
+      <div class="pair">
+        
+        
+      </div>
       
     </div>
     <div class="lab">
@@ -358,8 +411,12 @@ footer{font-size:13px;color:var(--muted);margin-top:30px}
       <canvas id="vfCv" width="640" height="280"></canvas>
       <div class="ctl"><label for="freq" data-i="t4lf"></label><output id="freqOut"></output><input type="range" id="freq" min="5" max="100" step="1" value="40"></div>
       <div class="btnrow"><span class="small" data-i="t4lp"></span><div class="seg" id="poles"><button type="button" data-p="2" aria-pressed="false">2</button><button type="button" data-p="4" aria-pressed="true">4</button><button type="button" data-p="6" aria-pressed="false">6</button></div></div>
-      <div style="display:grid;grid-template-columns:120px 1fr;gap:14px;align-items:center;margin-top:12px">
+      <div class="btnrow"><button type="button" class="btn" id="vfRun" data-i="pause"></button><button type="button" class="btn" id="vfRamp" data-i="rampA"></button></div>
+      <div class="tag" style="margin-top:12px"><span data-i="vfWaveL"></span><span id="vfWaveF"></span></div>
+      <canvas id="vfWave" width="640" height="130"></canvas>
+      <div class="vfmot">
         <svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="56" fill="var(--bg)" stroke="var(--line)"/><g id="shaft"><circle cx="60" cy="60" r="40" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/><rect x="56" y="22" width="8" height="38" rx="3" fill="var(--r)"/></g><circle cx="60" cy="60" r="7" fill="var(--ink)"/></svg>
+        <svg viewBox="0 0 200 130" id="vfTach" aria-hidden="true"></svg>
         <div class="meters" style="margin:0">
           <div class="meter"><span data-i="t4rNs"></span><b id="oNs">–</b></div>
           <div class="meter"><span data-i="t4rV"></span><b id="oV">–</b></div>
@@ -369,9 +426,29 @@ footer{font-size:13px;color:var(--muted);margin-top:30px}
       <p id="oRegion" class="small" style="margin:10px 0 0"></p>
     </div>
   </div>
-  
+  <div class="pair">
+    
+    
+  </div>
   <h3 data-i="t4h3"></h3>
   <p data-i="t4p5"></p>
+  <div class="lab">
+    <div class="tag"><span data-i="tryit"></span><span data-i="affTag"></span></div>
+    <div class="srgrid">
+      <div><canvas id="affCv" width="640" height="340"></canvas>
+        <div class="legend"><span><i style="background:var(--r);height:4px"></i><span data-i="lgPow"></span></span><span><i style="background:var(--y)"></i><span data-i="lgPres"></span></span><span><i style="background:var(--ok)"></i><span data-i="lgFlow"></span></span><span><i style="background:var(--ink);height:2px"></i><span data-i="lg100"></span></span></div></div>
+      <div>
+        <div class="ctl" style="margin-top:0"><label for="affS" data-i="affS"></label><output id="affOut"></output><input type="range" id="affS" min="10" max="100" step="1" value="80"></div>
+        <div class="meters">
+          <div class="meter"><span data-i="aFlow"></span><b id="aF">–</b></div>
+          <div class="meter"><span data-i="aPres"></span><b id="aP">–</b></div>
+          <div class="meter warn"><span data-i="aPow"></span><b id="aW">–</b></div>
+          <div class="meter fine"><span data-i="aSave"></span><b id="aS">–</b></div>
+        </div>
+        <p class="srnote" data-i="affNote"></p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- 5 -->
@@ -385,9 +462,18 @@ footer{font-size:13px;color:var(--muted);margin-top:30px}
     <div class="stage" style="--c:var(--b)"><h4 data-i="s3h"></h4><svg viewBox="0 0 200 56" id="w3"></svg><p data-i="t5s3"></p></div>
     <div class="stage" style="--c:var(--ok)"><h4 data-i="s4h"></h4><svg viewBox="0 0 200 56" id="w4"></svg><p data-i="t5s4"></p></div>
   </div>
+  <div class="lab t5ctl">
+    <div class="btnrow" style="margin-top:0"><button type="button" class="btn" id="t5Run" data-i="pause"></button></div>
+    <div class="ctl" style="margin-top:0"><label for="t5f" data-i="t5fL"></label><output id="t5fOut"></output><input type="range" id="t5f" min="5" max="50" step="1" value="50"></div>
+    <div class="t5mot"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="56" fill="var(--bg)" stroke="var(--line)"/><g id="t5shaft"><circle cx="60" cy="60" r="40" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/><rect x="56" y="22" width="8" height="38" rx="3" fill="var(--ok)"/></g><circle cx="60" cy="60" r="6" fill="var(--ink)"/></svg>
+      <div class="meter"><span data-i="t5rpm"></span><b id="t5rpmV">–</b></div></div>
+  </div>
   <div class="ctrlbar"><b data-i="s5h"></b> — <span data-i="t5s5"></span></div>
   <div class="cols">
-    
+    <div>
+      
+      
+    </div>
     <div>
       
       <h3 style="margin-top:6px" data-i="t5h2"></h3>
@@ -445,7 +531,10 @@ footer{font-size:13px;color:var(--muted);margin-top:30px}
     <ol class="seq"><li data-i="t6s1"></li><li data-i="t6s2"></li><li data-i="t6s3"></li><li data-i="t6s4"></li><li data-i="t6s5"></li></ol>
     
   </div>
-  
+  <div class="pair">
+    
+    
+  </div>
 </section>
 
 <!-- 7 -->
@@ -453,7 +542,10 @@ footer{font-size:13px;color:var(--muted);margin-top:30px}
   <div class="eyebrow" data-i="tab7"></div>
   <h2 data-i="t7h"></h2>
   <p class="lede" data-i="t7p1"></p>
-  
+  <div class="pair">
+    
+    
+  </div>
   <p class="small" data-i="ytNote"></p>
   <div class="cols">
     <div class="lab">
@@ -2783,27 +2875,57 @@ Object.assign(T.hi,{thProj:"प्रोजेक्टर (उच्च कं�
 Object.assign(T.kn,{thProj:"ಪ್ರೊಜೆಕ್ಟರ್ (ಹೆಚ್ಚಿನ ಕಾಂಟ್ರಾಸ್ಟ್)",present:"▶ ಪ್ರಸ್ತುತಿ",presentExit:"✕ ಪ್ರಸ್ತುತಿ ನಿಲ್ಲಿಸಿ"});
 Object.assign(T.ta,{thProj:"புரொஜெக்டர் (உயர் மாறுபாடு)",present:"▶ வழங்கல்",presentExit:"✕ வழங்கலை நிறுத்து"});
 
-T.en.foot="Prepared at NSTI Calicut. Star-rating data and charts: PIB / BEE. Motor videos: Learn Engineering on YouTube. Diagrams and animations were drawn for this lesson.";
-T.ml.foot="NSTI കോഴിക്കോട് തയ്യാറാക്കിയത്. സ്റ്റാർ റേറ്റിംഗ് ഡാറ്റയും ചാർട്ടുകളും: PIB / BEE. മോട്ടോർ വീഡിയോകൾ: YouTube-ലെ Learn Engineering. ഡയഗ്രങ്ങളും ആനിമേഷനുകളും ഈ പാഠത്തിനായി വരച്ചത്.";
-T.hi.foot="NSTI कालीकट द्वारा तैयार। स्टार-रेटिंग डेटा और चार्ट: PIB / BEE। मोटर वीडियो: YouTube पर Learn Engineering। आरेख और एनीमेशन इस पाठ के लिए बनाए गए।";
-T.kn.foot="NSTI ಕ್ಯಾಲಿಕಟ್ ತಯಾರಿಸಿದ್ದು. ಸ್ಟಾರ್ ರೇಟಿಂಗ್ ಡೇಟಾ ಮತ್ತು ಚಾರ್ಟ್‌ಗಳು: PIB / BEE. ಮೋಟಾರ್ ವೀಡಿಯೊಗಳು: YouTube ನಲ್ಲಿ Learn Engineering. ರೇಖಾಚಿತ್ರಗಳು ಮತ್ತು ಅನಿಮೇಶನ್‌ಗಳನ್ನು ಈ ಪಾಠಕ್ಕಾಗಿ ರಚಿಸಲಾಗಿದೆ.";
-T.ta.foot="NSTI கோழிக்கோடு தயாரித்தது. நட்சத்திர மதிப்பீட்டுத் தரவும் வரைபடங்களும்: PIB / BEE. மோட்டார் வீடியோக்கள்: YouTube-ல் Learn Engineering. வரைபடங்களும் அனிமேஷன்களும் இந்தப் பாடத்துக்காக வரையப்பட்டவை.";
-T.en.ytNote="Click a video to play it here. Source: Learn Engineering (YouTube).";
-T.ml.ytNote="ഇവിടെ പ്ലേ ചെയ്യാൻ വീഡിയോയിൽ ക്ലിക്ക് ചെയ്യുക. ഉറവിടം: Learn Engineering (YouTube).";
-T.hi.ytNote="यहीं चलाने के लिए वीडियो पर क्लिक करें। स्रोत: Learn Engineering (YouTube)।";
-T.kn.ytNote="ಇಲ್ಲೇ ಪ್ಲೇ ಮಾಡಲು ವೀಡಿಯೊ ಕ್ಲಿಕ್ ಮಾಡಿ. ಮೂಲ: Learn Engineering (YouTube).";
-T.ta.ytNote="இங்கேயே இயக்க வீடியோவைக் கிளிக் செய்யுங்கள். ஆதாரம்: Learn Engineering (YouTube).";
-T.en.anim="Animation";T.ml.anim="ആനിമേഷൻ";T.hi.anim="एनीमेशन";T.kn.anim="ಅನಿಮೇಶನ್";T.ta.anim="அனிமேஷன்";
-T.en.t3v="Step regulator: each step gives the fan more voltage, so it runs faster. The frequency stays 50 Hz.";
-T.ml.t3v="സ്റ്റെപ്പ് റെഗുലേറ്റർ: ഓരോ സ്റ്റെപ്പിലും ഫാനിന് കൂടുതൽ വോൾട്ടേജ്, അതിനാൽ വേഗം കൂടുന്നു. ഫ്രീക്വൻസി 50 Hz തന്നെ.";
-T.hi.t3v="स्टेप रेगुलेटर: हर स्टेप पर फैन को अधिक वोल्टेज, इसलिए वह तेज़ चलता है। फ्रीक्वेंसी 50 Hz ही रहती है।";
-T.kn.t3v="ಸ್ಟೆಪ್ ರೆಗ್ಯುಲೇಟರ್: ಪ್ರತಿ ಹಂತದಲ್ಲಿ ಫ್ಯಾನ್‌ಗೆ ಹೆಚ್ಚು ವೋಲ್ಟೇಜ್, ಆದ್ದರಿಂದ ವೇಗ ಹೆಚ್ಚುತ್ತದೆ. ಫ್ರೀಕ್ವೆನ್ಸಿ 50 Hz ಆಗಿಯೇ ಇರುತ್ತದೆ.";
-T.ta.t3v="ஸ்டெப் ரெகுலேட்டர்: ஒவ்வொரு படியிலும் ஃபேனுக்கு அதிக மின்னழுத்தம், அதனால் வேகம் கூடுகிறது. அதிர்வெண் 50 Hz-லேயே இருக்கும்.";
-T.en.t5v="Each stage changes the waveform: AC → pulsating DC → smooth DC → PWM → sine current.";
-T.ml.t5v="ഓരോ ഘട്ടവും വേവ്ഫോം മാറ്റുന്നു: AC → പൾസേറ്റിംഗ് DC → മിനുസമുള്ള DC → PWM → സൈൻ കറന്റ്.";
-T.hi.t5v="हर चरण वेवफॉर्म बदलता है: AC → स्पंदित DC → सुचारु DC → PWM → साइन करंट।";
-T.kn.t5v="ಪ್ರತಿ ಹಂತ ತರಂಗ ರೂಪ ಬದಲಿಸುತ್ತದೆ: AC → ಸ್ಪಂದಿಸುವ DC → ಸುಗಮ DC → PWM → ಸೈನ್ ಕರೆಂಟ್.";
-T.ta.t5v="ஒவ்வொரு நிலையும் அலைவடிவத்தை மாற்றுகிறது: AC → துடிக்கும் DC → மென்மையான DC → PWM → சைன் மின்னோட்டம்.";
+Object.assign(T.en,{srTag:"Step regulator: turn the knob",srRes:"Resistor type",srChoke:"Choke type",srOff:"Off",srAuto:"Auto",
+mSeries:"In series",mVfan:"Voltage at fan",mTq:"Motor torque (∝ V²)",mSpd:"Fan speed",mHeat:"Heat in regulator",mFanP:"Power to fan",mMains:"From mains",
+lgMotor:"Motor torque at this step",lgFull:"Motor torque at step 5 (230 V)",lgLoad:"Fan load torque",srAxN:"Speed (rpm)",srAxT:"Torque (% of full)",
+barFan:"Fan",barHeat:"Heat",srOffMsg:"Switch open: no current, no torque. The fan coasts to a stop.",
+srNote:"Illustrative values for a 60 W, 230 V ceiling fan (Ns ≈ 333 rpm). A lower step puts more resistance or reactance in series, so the fan gets less voltage. Motor torque ∝ V², so the motor's torque curve shrinks and meets the fan's load curve at a lower speed (yellow dot). At step 1 the torque is only about a quarter: the fan starts slowly and slows down further on a voltage dip. A resistor turns the dropped voltage into heat; a choke drops it with very little heat."});
+Object.assign(T.ml,{srTag:"സ്റ്റെപ്പ് റെഗുലേറ്റർ: നോബ് തിരിക്കുക",srRes:"റെസിസ്റ്റർ തരം",srChoke:"ചോക്ക് തരം",srOff:"ഓഫ്",srAuto:"ഓട്ടോ",
+mSeries:"സീരീസിൽ",mVfan:"ഫാനിലെ വോൾട്ടേജ്",mTq:"മോട്ടോർ ടോർക്ക് (∝ V²)",mSpd:"ഫാൻ വേഗത",mHeat:"റെഗുലേറ്ററിലെ ചൂട്",mFanP:"ഫാനിലേക്കുള്ള പവർ",mMains:"മെയിൻസിൽ നിന്ന്",
+lgMotor:"ഈ സ്റ്റെപ്പിലെ മോട്ടോർ ടോർക്ക്",lgFull:"സ്റ്റെപ്പ് 5-ലെ മോട്ടോർ ടോർക്ക് (230 V)",lgLoad:"ഫാൻ ലോഡ് ടോർക്ക്",srAxN:"വേഗത (rpm)",srAxT:"ടോർക്ക് (പൂർണ്ണത്തിന്റെ %)",
+barFan:"ഫാൻ",barHeat:"ചൂട്",srOffMsg:"സ്വിച്ച് തുറന്നു: കറന്റില്ല, ടോർക്കില്ല. ഫാൻ പതുക്കെ നിൽക്കുന്നു.",
+srNote:"60 W, 230 V സീലിംഗ് ഫാനിനുള്ള ഉദാഹരണ മൂല്യങ്ങൾ (Ns ≈ 333 rpm). താഴ്ന്ന സ്റ്റെപ്പിൽ കൂടുതൽ റെസിസ്റ്റൻസ് അല്ലെങ്കിൽ റിയാക്ടൻസ് സീരീസിൽ വരുന്നു; ഫാനിന് കുറഞ്ഞ വോൾട്ടേജ് കിട്ടുന്നു. മോട്ടോർ ടോർക്ക് ∝ V², അതിനാൽ ടോർക്ക് കർവ് ചുരുങ്ങി ഫാൻ ലോഡ് കർവിനെ കുറഞ്ഞ വേഗതയിൽ കണ്ടുമുട്ടുന്നു (മഞ്ഞ ബിന്ദു). സ്റ്റെപ്പ് 1-ൽ ടോർക്ക് ഏകദേശം നാലിലൊന്ന് മാത്രം: ഫാൻ പതുക്കെ സ്റ്റാർട്ട് ആകുന്നു, വോൾട്ടേജ് താഴ്ന്നാൽ വേഗത ഇനിയും കുറയുന്നു. റെസിസ്റ്റർ കുറച്ച വോൾട്ടേജിനെ ചൂടാക്കി മാറ്റുന്നു; ചോക്ക് വളരെ കുറഞ്ഞ ചൂടോടെ വോൾട്ടേജ് കുറയ്ക്കുന്നു."});
+Object.assign(T.hi,{srTag:"स्टेप रेगुलेटर: नॉब घुमाइए",srRes:"रेज़िस्टर प्रकार",srChoke:"चोक प्रकार",srOff:"बंद",srAuto:"ऑटो",
+mSeries:"सीरीज़ में",mVfan:"पंखे पर वोल्टेज",mTq:"मोटर टॉर्क (∝ V²)",mSpd:"पंखे की गति",mHeat:"रेगुलेटर में ऊष्मा",mFanP:"पंखे को पावर",mMains:"मेन्स से",
+lgMotor:"इस स्टेप पर मोटर टॉर्क",lgFull:"स्टेप 5 पर मोटर टॉर्क (230 V)",lgLoad:"पंखे का लोड टॉर्क",srAxN:"गति (rpm)",srAxT:"टॉर्क (पूर्ण का %)",
+barFan:"पंखा",barHeat:"ऊष्मा",srOffMsg:"स्विच खुला: न करंट, न टॉर्क। पंखा धीरे-धीरे रुक जाता है।",
+srNote:"60 W, 230 V छत के पंखे के लिए उदाहरण मान (Ns ≈ 333 rpm)। निचले स्टेप पर सीरीज़ में अधिक रेज़िस्टेंस या रिएक्टेंस आता है, इसलिए पंखे को कम वोल्टेज मिलता है। मोटर टॉर्क ∝ V², इसलिए टॉर्क कर्व सिकुड़कर पंखे के लोड कर्व से कम गति पर मिलता है (पीला बिंदु)। स्टेप 1 पर टॉर्क लगभग एक-चौथाई रह जाता है: पंखा धीरे स्टार्ट होता है और वोल्टेज गिरने पर और धीमा हो जाता है। रेज़िस्टर गिराए गए वोल्टेज को ऊष्मा में बदलता है; चोक बहुत कम ऊष्मा के साथ वोल्टेज गिराता है।"});
+Object.assign(T.kn,{srTag:"ಸ್ಟೆಪ್ ರೆಗ್ಯುಲೇಟರ್: ನಾಬ್ ತಿರುಗಿಸಿ",srRes:"ರೆಸಿಸ್ಟರ್ ವಿಧ",srChoke:"ಚೋಕ್ ವಿಧ",srOff:"ಆಫ್",srAuto:"ಆಟೋ",
+mSeries:"ಸರಣಿಯಲ್ಲಿ",mVfan:"ಫ್ಯಾನ್‌ನಲ್ಲಿ ವೋಲ್ಟೇಜ್",mTq:"ಮೋಟಾರ್ ಟಾರ್ಕ್ (∝ V²)",mSpd:"ಫ್ಯಾನ್ ವೇಗ",mHeat:"ರೆಗ್ಯುಲೇಟರ್‌ನಲ್ಲಿ ಶಾಖ",mFanP:"ಫ್ಯಾನ್‌ಗೆ ಪವರ್",mMains:"ಮೇನ್ಸ್‌ನಿಂದ",
+lgMotor:"ಈ ಸ್ಟೆಪ್‌ನಲ್ಲಿ ಮೋಟಾರ್ ಟಾರ್ಕ್",lgFull:"ಸ್ಟೆಪ್ 5ರಲ್ಲಿ ಮೋಟಾರ್ ಟಾರ್ಕ್ (230 V)",lgLoad:"ಫ್ಯಾನ್ ಲೋಡ್ ಟಾರ್ಕ್",srAxN:"ವೇಗ (rpm)",srAxT:"ಟಾರ್ಕ್ (ಪೂರ್ಣದ %)",
+barFan:"ಫ್ಯಾನ್",barHeat:"ಶಾಖ",srOffMsg:"ಸ್ವಿಚ್ ತೆರೆದಿದೆ: ಕರೆಂಟ್ ಇಲ್ಲ, ಟಾರ್ಕ್ ಇಲ್ಲ. ಫ್ಯಾನ್ ನಿಧಾನವಾಗಿ ನಿಲ್ಲುತ್ತದೆ.",
+srNote:"60 W, 230 V ಸೀಲಿಂಗ್ ಫ್ಯಾನ್‌ಗೆ ಉದಾಹರಣೆ ಮೌಲ್ಯಗಳು (Ns ≈ 333 rpm). ಕೆಳಗಿನ ಸ್ಟೆಪ್‌ನಲ್ಲಿ ಸರಣಿಯಲ್ಲಿ ಹೆಚ್ಚು ರೆಸಿಸ್ಟೆನ್ಸ್ ಅಥವಾ ರಿಯಾಕ್ಟೆನ್ಸ್ ಬರುತ್ತದೆ, ಆದ್ದರಿಂದ ಫ್ಯಾನ್‌ಗೆ ಕಡಿಮೆ ವೋಲ್ಟೇಜ್ ಸಿಗುತ್ತದೆ. ಮೋಟಾರ್ ಟಾರ್ಕ್ ∝ V², ಆದ್ದರಿಂದ ಟಾರ್ಕ್ ಕರ್ವ್ ಕುಗ್ಗಿ ಫ್ಯಾನ್ ಲೋಡ್ ಕರ್ವ್ ಅನ್ನು ಕಡಿಮೆ ವೇಗದಲ್ಲಿ ಸಂಧಿಸುತ್ತದೆ (ಹಳದಿ ಬಿಂದು). ಸ್ಟೆಪ್ 1ರಲ್ಲಿ ಟಾರ್ಕ್ ಸುಮಾರು ಕಾಲು ಭಾಗ ಮಾತ್ರ: ಫ್ಯಾನ್ ನಿಧಾನವಾಗಿ ಸ್ಟಾರ್ಟ್ ಆಗುತ್ತದೆ, ವೋಲ್ಟೇಜ್ ಇಳಿದರೆ ಇನ್ನಷ್ಟು ನಿಧಾನವಾಗುತ್ತದೆ. ರೆಸಿಸ್ಟರ್ ಇಳಿಸಿದ ವೋಲ್ಟೇಜ್ ಅನ್ನು ಶಾಖವಾಗಿ ಬದಲಿಸುತ್ತದೆ; ಚೋಕ್ ತುಂಬಾ ಕಡಿಮೆ ಶಾಖದೊಂದಿಗೆ ವೋಲ್ಟೇಜ್ ಇಳಿಸುತ್ತದೆ."});
+Object.assign(T.ta,{srTag:"ஸ்டெப் ரெகுலேட்டர்: குமிழைத் திருப்புங்கள்",srRes:"ரெசிஸ்டர் வகை",srChoke:"சோக் வகை",srOff:"ஆஃப்",srAuto:"தானியங்கி",
+mSeries:"தொடரில்",mVfan:"மின்விசிறியில் மின்னழுத்தம்",mTq:"மோட்டார் டார்க் (∝ V²)",mSpd:"மின்விசிறி வேகம்",mHeat:"ரெகுலேட்டரில் வெப்பம்",mFanP:"மின்விசிறிக்கு திறன்",mMains:"மெயின்ஸிலிருந்து",
+lgMotor:"இந்த ஸ்டெப்பில் மோட்டார் டார்க்",lgFull:"ஸ்டெப் 5-இல் மோட்டார் டார்க் (230 V)",lgLoad:"மின்விசிறி சுமை டார்க்",srAxN:"வேகம் (rpm)",srAxT:"டார்க் (முழுமையின் %)",
+barFan:"மின்விசிறி",barHeat:"வெப்பம்",srOffMsg:"சுவிட்ச் திறந்துள்ளது: மின்னோட்டம் இல்லை, டார்க் இல்லை. மின்விசிறி மெதுவாக நிற்கிறது.",
+srNote:"60 W, 230 V கூரை மின்விசிறிக்கான எடுத்துக்காட்டு மதிப்புகள் (Ns ≈ 333 rpm). கீழ் ஸ்டெப்பில் தொடரில் அதிக ரெசிஸ்டன்ஸ் அல்லது ரியாக்டன்ஸ் வருகிறது, எனவே மின்விசிறிக்குக் குறைந்த மின்னழுத்தம் கிடைக்கிறது. மோட்டார் டார்க் ∝ V², எனவே டார்க் வளைவு சுருங்கி, சுமை வளைவைக் குறைந்த வேகத்தில் சந்திக்கிறது (மஞ்சள் புள்ளி). ஸ்டெப் 1-இல் டார்க் சுமார் கால் பங்கு மட்டுமே: மின்விசிறி மெதுவாகத் தொடங்கும்; மின்னழுத்தம் குறைந்தால் இன்னும் மெதுவாகும். ரெசிஸ்டர் குறைத்த மின்னழுத்தத்தை வெப்பமாக மாற்றுகிறது; சோக் மிகக் குறைந்த வெப்பத்துடன் மின்னழுத்தத்தைக் குறைக்கிறது."});
+
+Object.assign(T.en,{contA:"Continue",rampA:"Auto ramp 5 → 100 Hz",rampStop:"Stop ramp",vfWaveL:"Drive output voltage, 3-phase, 40 ms window",cycW:"cycles in window",
+affTag:"Affinity laws: fan / pump",affS:"Speed (100% = 50 Hz)",lgFlow:"Flow ∝ N",lgPres:"Pressure ∝ N²",lgPow:"Power ∝ N³",lg100:"100% speed and 100% power markers",
+m100S:"100% speed (50 Hz)",m100P:"100% power",aFlow:"Flow",aPres:"Pressure",aPow:"Power needed",aSave:"Power saved",affAxX:"Speed (% of full)",affAxY:"% of full-speed value",
+affNote:"The dashed lines mark the full-speed reference: 100% speed (50 Hz) gives 100% flow, 100% pressure and 100% power. Slide the speed down: flow falls in step, but power falls as the cube. 80% speed needs only 51% power.",
+t5fL:"Inverter output frequency",t5rpm:"4-pole motor speed"});
+Object.assign(T.ml,{contA:"തുടരുക",rampA:"ഓട്ടോ റാമ്പ് 5 → 100 Hz",rampStop:"റാമ്പ് നിർത്തുക",vfWaveL:"ഡ്രൈവ് ഔട്ട്‌പുട്ട് വോൾട്ടേജ്, 3-ഫേസ്, 40 ms",cycW:"സൈക്കിൾ",
+affTag:"അഫിനിറ്റി നിയമങ്ങൾ: ഫാൻ / പമ്പ്",affS:"വേഗത (100% = 50 Hz)",lgFlow:"ഫ്ലോ ∝ N",lgPres:"പ്രഷർ ∝ N²",lgPow:"പവർ ∝ N³",lg100:"100% വേഗത, 100% പവർ മാർക്കറുകൾ",
+m100S:"100% വേഗത (50 Hz)",m100P:"100% പവർ",aFlow:"ഫ്ലോ",aPres:"പ്രഷർ",aPow:"ആവശ്യമായ പവർ",aSave:"ലാഭിച്ച പവർ",affAxX:"വേഗത (പൂർണ്ണത്തിന്റെ %)",affAxY:"പൂർണ്ണ വേഗതയിലെ മൂല്യത്തിന്റെ %",
+affNote:"ഡാഷ് വരകൾ പൂർണ്ണ വേഗതയുടെ റഫറൻസ് കാണിക്കുന്നു: 100% വേഗത (50 Hz) = 100% ഫ്ലോ, 100% പ്രഷർ, 100% പവർ. വേഗത കുറയ്ക്കുക: ഫ്ലോ അതേ അനുപാതത്തിൽ കുറയുന്നു, പക്ഷേ പവർ ക്യൂബ് ആയി കുറയുന്നു. 80% വേഗതയ്ക്ക് 51% പവർ മതി.",
+t5fL:"ഇൻവെർട്ടർ ഔട്ട്‌പുട്ട് ഫ്രീക്വൻസി",t5rpm:"4-പോൾ മോട്ടോർ വേഗത"});
+Object.assign(T.hi,{contA:"जारी रखें",rampA:"ऑटो रैम्प 5 → 100 Hz",rampStop:"रैम्प रोकें",vfWaveL:"ड्राइव आउटपुट वोल्टेज, 3-फेज़, 40 ms",cycW:"चक्र",
+affTag:"एफ़िनिटी नियम: पंखा / पंप",affS:"गति (100% = 50 Hz)",lgFlow:"प्रवाह ∝ N",lgPres:"दाब ∝ N²",lgPow:"पावर ∝ N³",lg100:"100% गति और 100% पावर मार्कर",
+m100S:"100% गति (50 Hz)",m100P:"100% पावर",aFlow:"प्रवाह",aPres:"दाब",aPow:"आवश्यक पावर",aSave:"बची पावर",affAxX:"गति (पूर्ण का %)",affAxY:"पूर्ण गति मान का %",
+affNote:"डैश रेखाएँ पूर्ण गति का संदर्भ दिखाती हैं: 100% गति (50 Hz) पर 100% प्रवाह, 100% दाब और 100% पावर। गति घटाइए: प्रवाह उसी अनुपात में घटता है, पर पावर घन के अनुसार घटती है। 80% गति पर केवल 51% पावर चाहिए।",
+t5fL:"इन्वर्टर आउटपुट आवृत्ति",t5rpm:"4-पोल मोटर गति"});
+Object.assign(T.kn,{contA:"ಮುಂದುವರಿಸಿ",rampA:"ಆಟೋ ರ‍್ಯಾಂಪ್ 5 → 100 Hz",rampStop:"ರ‍್ಯಾಂಪ್ ನಿಲ್ಲಿಸಿ",vfWaveL:"ಡ್ರೈವ್ ಔಟ್‌ಪುಟ್ ವೋಲ್ಟೇಜ್, 3-ಫೇಸ್, 40 ms",cycW:"ಆವರ್ತನಗಳು",
+affTag:"ಅಫಿನಿಟಿ ನಿಯಮಗಳು: ಫ್ಯಾನ್ / ಪಂಪ್",affS:"ವೇಗ (100% = 50 Hz)",lgFlow:"ಹರಿವು ∝ N",lgPres:"ಒತ್ತಡ ∝ N²",lgPow:"ಪವರ್ ∝ N³",lg100:"100% ವೇಗ ಮತ್ತು 100% ಪವರ್ ಗುರುತುಗಳು",
+m100S:"100% ವೇಗ (50 Hz)",m100P:"100% ಪವರ್",aFlow:"ಹರಿವು",aPres:"ಒತ್ತಡ",aPow:"ಬೇಕಾದ ಪವರ್",aSave:"ಉಳಿಸಿದ ಪವರ್",affAxX:"ವೇಗ (ಪೂರ್ಣದ %)",affAxY:"ಪೂರ್ಣ ವೇಗದ ಮೌಲ್ಯದ %",
+affNote:"ಡ್ಯಾಶ್ ರೇಖೆಗಳು ಪೂರ್ಣ ವೇಗದ ಉಲ್ಲೇಖವನ್ನು ತೋರಿಸುತ್ತವೆ: 100% ವೇಗ (50 Hz) = 100% ಹರಿವು, 100% ಒತ್ತಡ, 100% ಪವರ್. ವೇಗ ಕಡಿಮೆ ಮಾಡಿ: ಹರಿವು ಅದೇ ಅನುಪಾತದಲ್ಲಿ ಇಳಿಯುತ್ತದೆ, ಆದರೆ ಪವರ್ ಘನದಂತೆ ಇಳಿಯುತ್ತದೆ. 80% ವೇಗಕ್ಕೆ ಕೇವಲ 51% ಪವರ್ ಸಾಕು.",
+t5fL:"ಇನ್ವರ್ಟರ್ ಔಟ್‌ಪುಟ್ ಆವರ್ತನ",t5rpm:"4-ಪೋಲ್ ಮೋಟಾರ್ ವೇಗ"});
+Object.assign(T.ta,{contA:"தொடர்",rampA:"தானியங்கி ராம்ப் 5 → 100 Hz",rampStop:"ராம்பை நிறுத்து",vfWaveL:"டிரைவ் வெளியீட்டு மின்னழுத்தம், 3-பேஸ், 40 ms",cycW:"சுழற்சிகள்",
+affTag:"அஃபினிட்டி விதிகள்: மின்விசிறி / பம்ப்",affS:"வேகம் (100% = 50 Hz)",lgFlow:"ஓட்டம் ∝ N",lgPres:"அழுத்தம் ∝ N²",lgPow:"திறன் ∝ N³",lg100:"100% வேகம், 100% திறன் குறிகள்",
+m100S:"100% வேகம் (50 Hz)",m100P:"100% திறன்",aFlow:"ஓட்டம்",aPres:"அழுத்தம்",aPow:"தேவையான திறன்",aSave:"சேமித்த திறன்",affAxX:"வேகம் (முழுமையின் %)",affAxY:"முழு வேக மதிப்பின் %",
+affNote:"கோடுகள் முழு வேகக் குறிப்பைக் காட்டுகின்றன: 100% வேகம் (50 Hz) = 100% ஓட்டம், 100% அழுத்தம், 100% திறன். வேகத்தைக் குறைத்துப் பாருங்கள்: ஓட்டம் அதே விகிதத்தில் குறைகிறது, ஆனால் திறன் கனமாகக் குறைகிறது. 80% வேகத்திற்கு 51% திறன் போதும்.",
+t5fL:"இன்வெர்ட்டர் வெளியீட்டு அதிர்வெண்",t5rpm:"4-போல் மோட்டார் வேகம்"});
 
 
 </script>
@@ -2849,7 +2971,7 @@ function apply(){
   document.documentElement.lang=lang;
   document.querySelectorAll('[data-i]').forEach(el=>el.innerHTML=t(el.dataset.i));
   $('prevBtn').textContent=t('prev'); $('nextBtn').textContent=t('next');
-  $('pwmPlay').textContent=t(pwmRun?'pause':'play');
+  $('pwmPlay').textContent=t(pwmRun?'pause':'play'); vfBtns(); pzLabel(); $('t5Run').textContent=t(t5Run?'pause':'contA');
   $('theme').value=theme; $('presBtn').textContent=t(present?'presentExit':'present'); if($('pbLang'))$('pbLang').value=lang;
   buildSteps(); buildMF(); domFilter(domSel); stepIdx=-1; redraw();
 }
@@ -2970,6 +3092,133 @@ function drawTriac(){
 }
 $('alpha').oninput=drawTriac;
 
+/* ---------- step regulator (resistor / choke) with torque–speed ---------- */
+const SR={step:5,type:'R',auto:false,autoT:0,autoDir:-1,ang:null,nDisp:300,flow:0,blade:0,svg:null};
+const SR_RF=880, SR_RC=[0,132,311,566,880], SR_XC=[0,499,805,1110,1524], SR_NS=333, SR_SM=0.25;
+function srF(s){return 2/(s/SR_SM+SR_SM/s);}
+function srTm(s,V){return (V/230)**2*100*srF(s)/srF(0.1);}          // motor torque, % of full-speed load torque
+function srTL(n){return 100*(n/300)**2;}                              // fan load torque
+function srOp(V){if(V<1)return {n:0,T:0};let a=0.0005,b=1;for(let i=0;i<60;i++){const m=(a+b)/2,g=srTm(m,V)-srTL(SR_NS*(1-m));g<0?a=m:b=m;}const s=(a+b)/2;return {n:SR_NS*(1-s),T:srTm(s,V)};}
+function srVals(step,type){
+  if(step===0)return {Z:0,V:0,I:0,heat:0,fanP:0,mains:0,n:0,T:0,els:[0,0,0,0]};
+  const k=5-step, R=type==='R'?SR_RC[k]:0, X=type==='L'?SR_XC[k]:0, r=type==='L'?0.04*X:0;
+  const Zm=Math.hypot(SR_RF+R+r,X), I=230/Zm, V=I*SR_RF, fanP=I*I*SR_RF, heat=I*I*(R+r);
+  const els=[0,1,2,3].map(i=>{if(i>=k)return 0;const d=type==='R'?SR_RC[i+1]-SR_RC[i]:0.04*(SR_XC[i+1]-SR_XC[i]);return I*I*d;});
+  const op=srOp(V);return {Z:type==='R'?R:X,V,I,heat,fanP,mains:fanP+heat,n:op.n,T:op.T,els};
+}
+const SRK={x:360,y:212,r:64};
+function srCA(k){return k===5?205:155-32.5*k;}  // contact angle; k=0..4 taps, 5 = OFF
+function srCP(k){const a=srCA(k)*Math.PI/180;return [SRK.x+SRK.r*Math.cos(a),SRK.y-SRK.r*Math.sin(a)];}
+function buildSR(){
+  const sv=$('srSvg');if(!sv)return;
+  const NX=k=>120+120*k, Y=50;
+  let h=`<defs><marker id="ah_sr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--muted)"/></marker></defs>`;
+  // source & wiring
+  h+=`<g fill="none" stroke="var(--ink)" stroke-width="2"><path d="M50 148V${Y}H120"/><path d="M50 192V282H690V258"/><path d="M${SRK.x+20} ${SRK.y}H600V212"/>`;
+  for(let k=0;k<5;k++){const [cx,cy]=srCP(k);h+=`<path id="srTap${k}" d="M${NX(k)} ${Y}V102L${cx.toFixed(1)} ${cy.toFixed(1)}"/>`;}
+  h+=`</g><circle cx="50" cy="170" r="22" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/><path d="M36 170q7-12 14 0t14 0" fill="none" stroke="var(--ink)" stroke-width="2"/>`;
+  h+=`<text x="50" y="215" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" fill="var(--ink)" font-weight="600" transform="translate(-0 0)"><tspan x="18" y="128" text-anchor="start">L</tspan><tspan x="18" y="276" text-anchor="start">N</tspan></text>`;
+  h+=`<text x="84" y="176" font-family="IBM Plex Mono, monospace" font-size="12" fill="var(--muted)">230 V</text><text x="84" y="191" font-family="IBM Plex Mono, monospace" font-size="12" fill="var(--muted)">50 Hz</text>`;
+  // elements
+  for(let i=0;i<4;i++){const x0=NX(i),x1=NX(i+1),b0=x0+30;
+    h+=`<line x1="${x0}" y1="${Y}" x2="${b0}" y2="${Y}" stroke="var(--ink)" stroke-width="2"/><line x1="${b0+60}" y1="${Y}" x2="${x1}" y2="${Y}" stroke="var(--ink)" stroke-width="2"/>`;
+    h+=`<rect id="srGlow${i}" x="${b0-4}" y="${Y-16}" width="68" height="32" rx="6" fill="var(--r)" opacity="0"/>`;
+    h+=`<path id="srEl${i}" fill="none" stroke="var(--ink)" stroke-width="2.4" stroke-linejoin="round"/>`;
+    h+=`<g id="srHeat${i}" opacity="0" stroke="var(--r)" stroke-width="2" fill="none" stroke-linecap="round">`+[14,30,46].map(dx=>`<path d="M${b0+dx} ${Y-20}q-4-5 0-10t0-10"/>`).join('')+`</g>`;
+    h+=`<text id="srLb${i}" x="${b0+30}" y="${Y+34}" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="var(--muted)"></text>`;}
+  for(let k=0;k<5;k++)h+=`<circle cx="${NX(k)}" cy="${Y}" r="3.5" fill="var(--ink)"/>`;
+  // contacts
+  for(let k=0;k<6;k++){const [cx,cy]=srCP(k),a=srCA(k)*Math.PI/180,lx=SRK.x+(SRK.r+20)*Math.cos(a),ly=SRK.y-(SRK.r+20)*Math.sin(a)+4;
+    h+=`<circle class="knob" data-k="${k}" id="srC${k}" cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="7" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/>`;
+    h+=`<text class="knob" data-k="${k}" x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="14" font-weight="700" fill="var(--ink)">${k===5?'0':5-k}</text>`;}
+  h+=`<path id="srFlow" fill="none" stroke="var(--y)" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 15"/>`;
+  h+=`<g id="srWiper"><line x1="${SRK.x}" y1="${SRK.y}" x2="${SRK.x+SRK.r-8}" y2="${SRK.y}" stroke="var(--ink)" stroke-width="5" stroke-linecap="round"/></g>`;
+  h+=`<circle class="knob" id="srKnob" cx="${SRK.x}" cy="${SRK.y}" r="22" fill="var(--ink)"/><circle cx="${SRK.x}" cy="${SRK.y}" r="5" fill="var(--surface)" pointer-events="none"/>`;
+  // fan
+  h+=`<circle cx="600" cy="212" r="3.5" fill="var(--ink)"/><line x1="600" y1="212" x2="690" y2="212" stroke="var(--ink)" stroke-width="2"/><line x1="690" y1="212" x2="690" y2="166" stroke="var(--ink)" stroke-width="2"/>`;
+  h+=`<circle cx="690" cy="212" r="44" fill="var(--surface)" stroke="var(--ink)" stroke-width="2.2"/><g id="srBlades">`+[0,120,240].map(a=>`<path d="M690 212 L684 174 Q690 168 696 174 Z" fill="var(--b)" transform="rotate(${a} 690 212)"/>`).join('')+`</g><circle cx="690" cy="212" r="7" fill="var(--ink)"/>`;
+  h+=`<text id="srRpm" x="690" y="150" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="14" font-weight="700" fill="var(--ink)"></text>`;
+  sv.innerHTML=h;
+  sv.querySelectorAll('.knob').forEach(el=>el.addEventListener('click',()=>{if(el.id==='srKnob'){srSet(SR.step===5?0:SR.step+1);}else{const k=+el.dataset.k;srSet(k===5?0:5-k);}SR.auto=false;srUI();}));
+  const steps=$('srSteps');steps.innerHTML='';
+  [0,1,2,3,4,5].forEach(s=>{const b=document.createElement('button');b.type='button';b.dataset.s=s;b.textContent=s===0?t('srOff'):String(s);b.onclick=()=>{SR.auto=false;srSet(s);srUI();};steps.appendChild(b);});
+  $('srType').querySelectorAll('button').forEach(b=>b.onclick=()=>{SR.type=b.dataset.t;srShape();srUI();});
+  $('srAuto').onclick=()=>{SR.auto=!SR.auto;SR.autoT=0;srUI();};
+  srShape();srUI();
+}
+function srShape(){
+  const Y=50;
+  for(let i=0;i<4;i++){const b0=120+120*i+30;let d;
+    if(SR.type==='R'){d=`M${b0} ${Y}l5 -10`;for(let j=0;j<5;j++)d+=`l10 ${j%2?-20:20}`;d+=`l5 -10`;}
+    else{d=`M${b0} ${Y}`;for(let j=0;j<4;j++)d+=`a7.5 9 0 0 1 15 0`;d+=`M${b0} ${Y-14}h60M${b0} ${Y-18}h60`;}
+    $('srEl'+i).setAttribute('d',d);
+    const v=SR.type==='R'?SR_RC[i+1]-SR_RC[i]:SR_XC[i+1]-SR_XC[i];
+    $('srLb'+i).textContent=(SR.type==='R'?'R':'X')+(i+1)+' '+v+' Ω';}
+}
+function srSet(s){SR.step=s;}
+function srPath(){
+  if(SR.step===0)return '';
+  const k=5-SR.step, [cx,cy]=srCP(k);
+  return `M50 148V50H${120+120*k}V102L${cx.toFixed(1)} ${cy.toFixed(1)}L${SRK.x} ${SRK.y}H690V256M690 256V282H50V192`;
+}
+function srUI(){
+  if(!$('srSvg')||!$('srSvg').firstChild)return;
+  const v=srVals(SR.step,SR.type);
+  $('srSteps').querySelectorAll('button').forEach(b=>{b.setAttribute('aria-pressed',+b.dataset.s===SR.step);if(+b.dataset.s===0)b.textContent=t('srOff');});
+  $('srType').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.t===SR.type));
+  $('srAuto').setAttribute('aria-pressed',SR.auto);
+  for(let k=0;k<6;k++){const on=(SR.step===0&&k===5)||(SR.step>0&&k===5-SR.step);$('srC'+k).setAttribute('fill',on?'var(--y)':'var(--surface)');}
+  for(let k=0;k<5;k++)$('srTap'+k).setAttribute('stroke',SR.step>0&&k===5-SR.step?'var(--ink)':'var(--line)');
+  for(let i=0;i<4;i++){const p=v.els[i],inC=SR.step>0&&i<5-SR.step,q=Math.min(1,p/9);
+    $('srGlow'+i).setAttribute('opacity',(SR.type==='R'?q*0.55:0).toFixed(2));
+    $('srHeat'+i).setAttribute('opacity',(SR.type==='R'&&p>0.8?0.35+0.65*q:0).toFixed(2));
+    $('srEl'+i).setAttribute('stroke',inC?'var(--ink)':'var(--line)');}
+  $('srFlow').setAttribute('d',srPath());
+  $('srMR').textContent=SR.step===0?'∞':(v.Z?(SR.type==='R'?'R ':'X ')+Math.round(v.Z)+' Ω':'0 Ω');
+  $('srMV').textContent=Math.round(v.V)+' V';
+  $('srMT').textContent=Math.round((v.V/230)**2*100)+' %';
+  $('srMS').textContent='≈ '+Math.round(v.n)+' rpm';
+  $('srMH').textContent=v.heat.toFixed(1)+' W';
+  $('srMF').textContent=v.fanP.toFixed(1)+' W';
+  const tot=v.mains||1;$('srBF').style.width=(v.mains?v.fanP/tot*100:0)+'%';$('srBH').style.width=(v.mains?v.heat/tot*100:0)+'%';
+  $('srMains').innerHTML=`<b style="color:var(--ink)">${t('mMains')}: ${v.mains.toFixed(1)} W</b>`+(v.heat>0.05?` · ${t('barHeat')} ${Math.round(v.heat/v.mains*100)} %`:'');
+  SR.v=v; drawSR();
+}
+function drawSR(){
+  const cv=$('srCv');if(!cv||!cv.offsetParent||!SR.v)return;
+  const [c,w,h]=cv2(cv),L=58,B=36,T=12,R=12,W=w-L-R,H=h-B-T,TMAX=160;
+  const X=n=>L+n/SR_NS*W, Yt=v=>T+H-Math.min(TMAX,v)/TMAX*H;
+  c.strokeStyle=css('--line');c.lineWidth=1;c.fillStyle=css('--muted');c.font='11px IBM Plex Mono, monospace';
+  c.textAlign='right';for(let v=0;v<=TMAX;v+=20){c.beginPath();c.moveTo(L,Yt(v));c.lineTo(L+W,Yt(v));c.stroke();if(v%40===0)c.fillText(v+'%',L-5,Yt(v)+4);}c.textAlign='left';
+  for(let n=0;n<=300;n+=100){c.beginPath();c.moveTo(X(n),T);c.lineTo(X(n),T+H);c.stroke();c.fillText(String(n),X(n)-10,T+H+14);}
+  c.fillText('Ns',X(SR_NS)-14,T+H+14);
+  c.fillStyle=css('--ink');c.font='600 11px Barlow, sans-serif';c.fillText(t('srAxN'),L+W/2-30,h-4);
+  c.save();c.translate(13,T+H/2);c.rotate(-Math.PI/2);c.textAlign='center';c.fillText(t('srAxT'),0,0);c.restore();
+  const curve=(V,col,lw,dash)=>{c.strokeStyle=col;c.lineWidth=lw;c.setLineDash(dash||[]);c.beginPath();for(let i=0;i<=200;i++){const n=i/200*SR_NS*0.999,s=1-n/SR_NS;const y=Yt(srTm(Math.max(s,0.001),V));i?c.lineTo(X(n),y):c.moveTo(X(n),y);}c.stroke();c.setLineDash([]);};
+  // faint curves for every step
+  for(let s=1;s<=5;s++){const V=srVals(s,SR.type).V;curve(V,css('--line'),1);}
+  curve(230,css('--muted'),1.6,[5,4]);
+  c.strokeStyle=css('--r');c.lineWidth=2.4;c.beginPath();for(let i=0;i<=100;i++){const n=i/100*SR_NS;i?c.lineTo(X(n),Yt(srTL(n))):c.moveTo(X(n),Yt(srTL(n)));}c.stroke();
+  const v=SR.v;
+  if(SR.step>0){curve(v.V,css('--accent'),3.2);
+    const px=X(v.n),py=Yt(v.T);c.setLineDash([3,3]);c.strokeStyle=css('--ink');c.lineWidth=1;c.beginPath();c.moveTo(px,py);c.lineTo(px,T+H);c.moveTo(px,py);c.lineTo(L,py);c.stroke();c.setLineDash([]);
+    c.fillStyle=css('--y');c.strokeStyle=css('--ink');c.lineWidth=2;c.beginPath();c.arc(px,py,6.5,0,7);c.fill();c.stroke();
+    c.fillStyle=css('--ink');c.font='600 12px IBM Plex Mono, monospace';const lab=Math.round(v.n)+' rpm';c.fillText(lab,Math.min(px+8,L+W-c.measureText(lab).width),py-10);
+    c.fillStyle=css('--muted');c.font='11px IBM Plex Mono, monospace';c.fillText('T ∝ V²  ('+Math.round(v.V)+' V)',L+6,T+12);}
+  else{c.fillStyle=css('--muted');c.font='600 13px Barlow, sans-serif';c.fillText(t('srOffMsg'),L+8,T+16);}
+}
+function srTick(dt){
+  if(!SR.v)return;
+  if(SR.auto){SR.autoT+=dt;if(SR.autoT>2.6){SR.autoT=0;let s=SR.step+SR.autoDir;if(s<1||s>5){SR.autoDir*=-1;s=SR.step+SR.autoDir;}srSet(s);srUI();}}
+  SR.nDisp+=(SR.v.n-SR.nDisp)*Math.min(1,dt*(SR.step===0?0.5:1.4));
+  SR.blade=(SR.blade+SR.nDisp/60*0.55*360*dt)%360;$('srBlades').setAttribute('transform',`rotate(${SR.blade.toFixed(1)} 690 212)`);
+  $('srRpm').textContent=Math.round(SR.nDisp)+' rpm';
+  SR.flow-=dt*(8+SR.v.I*260);$('srFlow').setAttribute('stroke-dashoffset',SR.flow.toFixed(1));
+  const tgt=SR.step===0?srCA(5):srCA(5-SR.step);if(SR.ang===null)SR.ang=tgt;SR.ang+=(tgt-SR.ang)*Math.min(1,dt*9);
+  $('srWiper').setAttribute('transform',`rotate(${(-SR.ang).toFixed(2)} ${SRK.x} ${SRK.y})`);
+  const t0=performance.now()/1000;for(let i=0;i<4;i++){const g=$('srHeat'+i);g.setAttribute('transform',`translate(0 ${(-((t0*14+i*5)%12)).toFixed(1)})`);}
+}
+
 /* ---------- 4: V/f ---------- */
 let poles=4, shaftAng=0;
 document.querySelectorAll('#poles button').forEach(b=>b.onclick=()=>{poles=+b.dataset.p;document.querySelectorAll('#poles button').forEach(x=>x.setAttribute('aria-pressed',x===b));drawVF();});
@@ -2989,7 +3238,74 @@ function drawVF(){
   $('oP').textContent=(Pr<10?Pr.toFixed(1):Math.round(Pr))+' %';
   $('oRegion').innerHTML=f<=50?t('t4inCT'):t('t4fw');
 }
-$('freq').oninput=drawVF;
+$('freq').oninput=()=>{drawVF();const f=+$('freq').value;if(f<=50){$('affS').value=Math.max(10,f*2);drawAff();}if(vfRamp){vfRampF=f;}};
+
+/* ---- 4: run/pause, ramp, output waveform, tacho ---- */
+let vfRun=true, vfRamp=false, vfRampDir=1, vfT=0, vfRampF=null;
+function vfBtns(){$('vfRun').textContent=t(vfRun?'pause':'contA');$('vfRamp').textContent=t(vfRamp?'rampStop':'rampA');$('vfRamp').setAttribute('aria-pressed',vfRamp);}
+$('vfRun').onclick=()=>{vfRun=!vfRun;vfBtns();};
+$('vfRamp').onclick=()=>{vfRamp=!vfRamp;vfRampF=+$('freq').value;if(vfRamp)vfRun=true;vfBtns();};
+function buildTach(){const g=$('vfTach');if(!g)return;let h='';const cx=100,cy=110,R=86;
+  h+=`<path d="M${cx-R} ${cy}A${R} ${R} 0 0 1 ${cx+R} ${cy}" fill="none" stroke="var(--line)" stroke-width="12"/>`;
+  h+=`<path id="tachArc" fill="none" stroke="var(--b)" stroke-width="12"/>`;
+  for(let i=0;i<=6;i++){const a=Math.PI-i/6*Math.PI,x1=cx+(R-10)*Math.cos(a),y1=cy-(R-10)*Math.sin(a),x2=cx+(R+6)*Math.cos(a),y2=cy-(R+6)*Math.sin(a);h+=`<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="var(--ink)" stroke-width="1.5"/>`;}
+  h+=`<line id="tachNeedle" x1="${cx}" y1="${cy}" x2="${cx-R+18}" y2="${cy}" stroke="var(--r)" stroke-width="4" stroke-linecap="round"/><circle cx="${cx}" cy="${cy}" r="7" fill="var(--ink)"/>`;
+  h+=`<text id="tachTxt" x="${cx}" y="${cy-30}" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="18" font-weight="700" fill="var(--ink)"></text><text id="tachMax" x="${cx}" y="${cy-12}" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--muted)"></text>`;
+  g.innerHTML=h;}
+let tachShown=0;
+function setTach(n,dt){const max=poles===2?6000:poles===4?3000:2000;tachShown+= (n-tachShown)*Math.min(1,dt?dt*4:1);const fr=Math.max(0,Math.min(1,tachShown/max)),a=Math.PI-fr*Math.PI,cx=100,cy=110,R=86;
+  $('tachNeedle').setAttribute('x2',(cx+(R-18)*Math.cos(a)).toFixed(1));$('tachNeedle').setAttribute('y2',(cy-(R-18)*Math.sin(a)).toFixed(1));
+  const ex=cx+R*Math.cos(a),ey=cy-R*Math.sin(a);$('tachArc').setAttribute('d',fr>0.002?`M${cx-R} ${cy}A${R} ${R} 0 0 1 ${ex.toFixed(1)} ${ey.toFixed(1)}`:'');
+  $('tachTxt').textContent=Math.round(tachShown)+' rpm';$('tachMax').textContent='0 … '+max+' rpm';}
+function drawVfWave(){
+  const cv=$('vfWave');if(!cv||!cv.offsetParent)return;const f=+$('freq').value,V=f<=50?415*f/50:415;
+  const [c,w,h]=cv2(cv),mid=h/2,A=(h/2-10)*V/415,L=6,W=w-12;
+  c.strokeStyle=css('--line');c.lineWidth=1;c.beginPath();c.moveTo(L,mid);c.lineTo(L+W,mid);c.stroke();
+  c.setLineDash([3,4]);[1,-1].forEach(sg=>{c.beginPath();c.moveTo(L,mid-sg*(h/2-10));c.lineTo(L+W,mid-sg*(h/2-10));c.stroke();});c.setLineDash([]);
+  const col=[css('--r'),css('--y'),css('--b')];
+  for(let k=0;k<3;k++){c.strokeStyle=col[k];c.lineWidth=2.2;c.beginPath();for(let x=0;x<=W;x+=2){const tm=x/W*0.04;const y=mid-A*Math.sin(2*Math.PI*f*(tm+vfT)-k*2.094);x?c.lineTo(L+x,y):c.moveTo(L+x,y);}c.stroke();}
+  c.fillStyle=css('--muted');c.font='11px IBM Plex Mono, monospace';c.fillText('415 V',L+4,14);
+  $('vfWaveF').textContent=f+' Hz · '+Math.round(V)+' V · '+(f*0.04).toFixed(1)+' '+t('cycW');
+}
+function vfTick(dt){
+  if(!vfRun){return;}
+  if(vfRamp){vfRampF+=vfRampDir*dt*12;if(vfRampF>=100){vfRampF=100;vfRampDir=-1;}if(vfRampF<=5){vfRampF=5;vfRampDir=1;}$('freq').value=Math.round(vfRampF);drawVF();}
+  const f=+$('freq').value;vfT+=dt*0.12; // slowed view of real time
+  const Ns=120*f/poles,n=Ns*0.96;
+  shaftAng=(shaftAng+(n/60)/20*360*dt)%360;$('shaft').setAttribute('transform',`rotate(${shaftAng} 60 60)`);
+  setTach(n,dt);drawVfWave();
+}
+
+/* ---- 4: affinity laws chart ---- */
+function drawAff(){
+  const cv=$('affCv');if(!cv||!cv.offsetParent)return;const sp=+$('affS').value;
+  const [c,w,h]=cv2(cv),L=52,B=34,T=14,R=14,W=w-L-R,H=h-B-T,X=v=>L+v/115*W,Y=v=>T+H-v/115*H;
+  c.font='11px IBM Plex Mono, monospace';c.strokeStyle=css('--line');c.lineWidth=1;c.fillStyle=css('--muted');
+  for(let v=0;v<=100;v+=20){c.beginPath();c.moveTo(X(v),T);c.lineTo(X(v),T+H);c.stroke();c.beginPath();c.moveTo(L,Y(v));c.lineTo(L+W,Y(v));c.stroke();c.fillText(v+'%',X(v)-12,T+H+14);c.textAlign='right';c.fillText(String(v),L-6,Y(v)+4);c.textAlign='left';}
+  c.fillStyle=css('--ink');c.font='600 11px Barlow, sans-serif';c.fillText(t('affAxX'),L+W/2-40,h-4);c.save();c.translate(13,T+H/2);c.rotate(-Math.PI/2);c.textAlign='center';c.fillText(t('affAxY'),0,0);c.restore();
+  c.save();c.beginPath();c.rect(L,T,W,H);c.clip();
+  const cur=(fn,col,lw,dash)=>{c.strokeStyle=col;c.lineWidth=lw;c.setLineDash(dash||[]);c.beginPath();for(let i=0;i<=110;i++){const y=Y(fn(i/100)*100);i?c.lineTo(X(i),y):c.moveTo(X(i),y);}c.stroke();c.setLineDash([]);};
+  cur(x=>x,css('--ok'),2);cur(x=>x*x,css('--y'),2);cur(x=>x*x*x,css('--r'),3.4);c.restore();
+  // 100% markers
+  c.strokeStyle=css('--ink');c.lineWidth=1.6;c.setLineDash([7,5]);c.beginPath();c.moveTo(X(100),T);c.lineTo(X(100),T+H);c.moveTo(L,Y(100));c.lineTo(L+W,Y(100));c.stroke();c.setLineDash([]);
+  c.fillStyle=css('--ink');c.strokeStyle=css('--surface');c.lineWidth=2;c.beginPath();c.arc(X(100),Y(100),6,0,7);c.fill();
+  c.font='600 12px Barlow, sans-serif';const l1=t('m100S'),l2=t('m100P');
+  c.save();c.translate(X(100)-6,T+H-6);c.rotate(-Math.PI/2);c.fillText(l1,0,0);c.restore();c.fillText(l2,L+6,Y(100)-6);
+  // operating point
+  const s=sp/100,P=s*s*s*100;
+  c.strokeStyle=css('--r');c.lineWidth=1.2;c.setLineDash([3,3]);c.beginPath();c.moveTo(X(sp),T+H);c.lineTo(X(sp),Y(P));c.lineTo(L,Y(P));c.stroke();c.setLineDash([]);
+  [[s*100,css('--ok')],[s*s*100,css('--y')],[P,css('--r')]].forEach(([v,col])=>{c.fillStyle=col;c.strokeStyle=css('--ink');c.lineWidth=1.5;c.beginPath();c.arc(X(sp),Y(v),5,0,7);c.fill();c.stroke();});
+  c.fillStyle=css('--r');c.font='700 13px IBM Plex Mono, monospace';const lb=sp+'% → '+Math.round(P)+'%';c.fillText(lb,Math.min(X(sp)+10,L+W-c.measureText(lb).width-4),Y(P)+18);
+  // saving band
+  if(sp<100){c.fillStyle=css('--ok')+'22';c.fillRect(X(sp)-7,Y(100),14,Y(P)-Y(100));}
+  $('affOut').textContent=sp+' % ('+(sp/2).toFixed(0)+' Hz)';$('aF').textContent=Math.round(s*100)+' %';$('aP').textContent=Math.round(s*s*100)+' %';$('aW').textContent=(P<10?P.toFixed(1):Math.round(P))+' %';$('aS').textContent=Math.round(100-P)+' %';
+}
+$('affS').oninput=()=>{drawAff();const f=Math.round(+$('affS').value/2);if(f>=5){$('freq').value=f;drawVF();}};
+
+/* ---- 5: run/pause + output frequency ---- */
+let t5Run=true,t5Ang=0;
+$('t5Run').onclick=()=>{t5Run=!t5Run;$('t5Run').textContent=t(t5Run?'pause':'contA');};
+$('t5f').oninput=()=>{const f=+$('t5f').value;$('t5fOut').textContent=f+' Hz';$('t5rpmV').textContent=Math.round(30*f*0.96)+' rpm';stageW(wph);};
 
 /* ---------- 5: stage waveforms (animated) ---------- */
 function stageW(ph){
@@ -2997,9 +3313,10 @@ function stageW(ph){
   const col=[css('--r'),css('--y'),css('--b')];
   $('w1').innerHTML=[0,1,2].map(k=>`<path d="${P(x=>Math.sin(2*Math.PI*(2*x)-k*2.094-ph))}" fill="none" stroke="${col[k]}" stroke-width="2"/>`).join('');
   $('w2').innerHTML=`<path d="${P(x=>{const th=2*Math.PI*2*x-ph;return Math.max(...[0,1,2].map(k=>Math.abs(Math.sin(th-k*1.047))))*.9+.05})}" fill="none" stroke="${css('--muted')}" stroke-width="1.5" stroke-dasharray="3 3"/><line x1="0" y1="7" x2="200" y2="7" stroke="${css('--y')}" stroke-width="3"/>`;
-  let d='',pv=null;for(let i=0;i<=200;i++){const x=i/200,car=((x*18+ph/6)%1),tri=car<.5?4*car-1:3-4*car,s=(.85*Math.sin(2*Math.PI*1.5*x-ph))>tri?1:-1;const y=28-s*20;if(pv===null)d+='M'+i+','+y;else if(s!==pv)d+='L'+i+','+(28-pv*20)+'L'+i+','+y;else d+='L'+i+','+y;pv=s;}
+  const fo=(($('t5f')&&+$('t5f').value)||50)/50,ph2=ph*fo,ma=.25+.6*Math.min(1,fo);
+  let d='',pv=null;for(let i=0;i<=200;i++){const x=i/200,car=((x*18+ph/6)%1),tri=car<.5?4*car-1:3-4*car,s=(ma*Math.sin(2*Math.PI*2*fo*x-ph2))>tri?1:-1;const y=28-s*20;if(pv===null)d+='M'+i+','+y;else if(s!==pv)d+='L'+i+','+(28-pv*20)+'L'+i+','+y;else d+='L'+i+','+y;pv=s;}
   $('w3').innerHTML=`<path d="${d}" fill="none" stroke="${css('--b')}" stroke-width="1.6"/>`;
-  $('w4').innerHTML=`<path d="${P(x=>.85*Math.sin(2*Math.PI*1.5*x-ph))}" fill="none" stroke="${css('--ok')}" stroke-width="2.5"/>`;
+  $('w4').innerHTML=`<path d="${P(x=>ma*Math.sin(2*Math.PI*2*fo*x-ph2))}" fill="none" stroke="${css('--ok')}" stroke-width="2.5"/>`;
 }
 
 /* ---------- 6: PWM with sweep + inverter leg ---------- */
@@ -3032,14 +3349,14 @@ function buildMotor(svgId,polePairs){
   add('circle',{cx:160,cy:160,r:150,fill:'var(--sunk)',stroke:'var(--line)','stroke-width':2});
   const coils=[];
   ['U','V','W'].forEach((n,k)=>{[0,1].forEach(sd=>{const deg=k*120+sd*180, a=deg*Math.PI/180-Math.PI/2, x=160+120*Math.cos(a), y=160+120*Math.sin(a);
-    const g=add('g',{});g.innerHTML=`<rect x="${x-22}" y="${y-13}" width="44" height="26" rx="6" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.2" transform="rotate(${deg} ${x} ${y})"/><text x="${x}" y="${y+5}" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" font-weight="700" fill="var(--ink)">${n}${sd?"'":""}</text>`;
+    const g=add('g',{});g.innerHTML=`<rect x="${x-22}" y="${y-13}" width="44" height="26" rx="6" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.2" transform="rotate(${deg} ${x} ${y})"/><text x="${x}" y="${y+5}" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="700" fill="var(--ink)">${n}${sd?"'":""}</text>`;
     coils.push({r:g.querySelector('rect'),k,sd});});});
   const field=add('line',{x1:160,y1:160,x2:160,y2:42,stroke:'var(--y)','stroke-width':5,'stroke-linecap':'round'});
   const rot=add('g',{});
   rot.innerHTML=`<circle cx="160" cy="160" r="66" fill="var(--surface)" stroke="var(--ink)" stroke-width="2"/>`;
   const np=polePairs*2;
   for(let i=0;i<np;i++){const deg=i*360/np;const n=i%2===0;
-    rot.innerHTML+=`<g transform="rotate(${deg} 160 160)"><rect x="146" y="${np>2?100:100}" width="28" height="${np>2?40:58}" rx="6" fill="${n?'var(--r)':'var(--b)'}"/><text x="160" y="${np>2?125:134}" text-anchor="middle" font-family="IBM Plex Mono" font-size="14" font-weight="700" fill="#fff">${n?'N':'S'}</text></g>`;}
+    rot.innerHTML+=`<g transform="rotate(${deg} 160 160)"><rect x="146" y="${np>2?100:100}" width="28" height="${np>2?40:58}" rx="6" fill="${n?'var(--r)':'var(--b)'}"/><text x="160" y="${np>2?125:134}" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="14" font-weight="700" fill="#fff">${n?'N':'S'}</text></g>`;}
   rot.innerHTML+=`<circle cx="160" cy="160" r="9" fill="var(--ink)"/>`;
   return {coils,field,rot,pp:polePairs};
 }
@@ -3143,7 +3460,7 @@ function drawSix(){
   const ph=[['U',-90],['V',30],['W',150]];
   let html=`<circle cx="${cx}" cy="${cy}" r="120" fill="var(--sunk)" stroke="var(--line)"/>`;
   ph.forEach(([n,a],k)=>{const ar=a*Math.PI/180,x=cx+95*Math.cos(ar),y=cy+95*Math.sin(ar);const v=r[k];const col=v==='+'?'var(--r)':v==='−'?'var(--b)':'var(--line)';
-    html+=`<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="${col}" stroke-width="${v==='0'?3:8}" stroke-linecap="round"/><text x="${cx+112*Math.cos(ar)}" y="${cy+112*Math.sin(ar)+5}" text-anchor="middle" font-family="IBM Plex Mono" font-size="15" font-weight="700" fill="var(--ink)">${n}${v==='0'?'':v}</text>`;});
+    html+=`<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="${col}" stroke-width="${v==='0'?3:8}" stroke-linecap="round"/><text x="${cx+112*Math.cos(ar)}" y="${cy+112*Math.sin(ar)+5}" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="15" font-weight="700" fill="var(--ink)">${n}${v==='0'?'':v}</text>`;});
   const ang=-90+sixStep*60+30; const ar=ang*Math.PI/180;
   html+=`<line x1="${cx}" y1="${cy}" x2="${cx+60*Math.cos(ar)}" y2="${cy+60*Math.sin(ar)}" stroke="var(--y)" stroke-width="6" stroke-linecap="round"/><circle cx="${cx}" cy="${cy}" r="8" fill="var(--ink)"/>`;
   s.innerHTML=html;
@@ -3167,13 +3484,13 @@ document.querySelectorAll('#dom button').forEach(b=>b.onclick=()=>domFilter(b.da
 function drawDom(now){
   const s=$('domSvg'); if(!s.closest('.on')) return;
   const boxes=[['c1',t('f1'),'--y',20],['c2',t('f2'),'--ok',190],['c3',t('f3'),'--b',360]];
-  const pulse=.5+.5*Math.sin(now/300);
+  now=domClock;const pulse=.5+.5*Math.sin(now/300);
   let html='';
   boxes.forEach(([k,lbl,col,x])=>{const act=domSel==='all'||domSel===k;
     html+=`<rect x="${x}" y="40" width="140" height="70" rx="8" fill="var(--surface)" stroke="${css(col)}" stroke-width="${act?2+2*pulse:1}" opacity="${act?1:.35}"/><foreignObject x="${x+6}" y="46" width="128" height="60"><div xmlns="http://www.w3.org/1999/xhtml" style="font:600 14px/1.2 var(--display);color:var(--ink);text-align:center;display:flex;align-items:center;justify-content:center;height:58px">${lbl}</div></foreignObject>`;});
   const dx=(now/12)%170;
   html+=`<line x1="160" y1="75" x2="190" y2="75" stroke="var(--muted)" stroke-width="2"/><line x1="330" y1="75" x2="360" y2="75" stroke="var(--muted)" stroke-width="2"/>`;
-  html+=`<circle cx="${20+dx*2.8}" cy="140" r="5" fill="var(--r)"/><text x="20" y="160" font-family="IBM Plex Mono" font-size="10" fill="var(--muted)">${t('a12n')}</text>`;
+  html+=`<circle cx="${20+dx*2.8}" cy="140" r="5" fill="var(--r)"/><text x="20" y="160" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--muted)">${t('a12n')}</text>`;
   s.innerHTML=html;
 }
 
@@ -3216,7 +3533,7 @@ function drawEEV(){
   const frac=eevPos/480, ny=60+frac*70;
   const phases=['A','B','A\'','B\''];
   let html=`<rect x="110" y="20" width="100" height="70" rx="8" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.5"/>`;
-  phases.forEach((p,i)=>{const on=i===eevPh%4&&Math.abs(target-eevPos)>0.5;html+=`<rect x="${118+i*23}" y="30" width="18" height="24" rx="3" fill="${on?css('--y'):css('--sunk')}" stroke="var(--ink)" stroke-width="1"/><text x="${127+i*23}" y="70" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="var(--muted)">${p}</text>`;});
+  phases.forEach((p,i)=>{const on=i===eevPh%4&&Math.abs(target-eevPos)>0.5;html+=`<rect x="${118+i*23}" y="30" width="18" height="24" rx="3" fill="${on?css('--y'):css('--sunk')}" stroke="var(--ink)" stroke-width="1"/><text x="${127+i*23}" y="70" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="var(--muted)">${p}</text>`;});
   html+=`<rect x="40" y="170" width="240" height="40" fill="var(--sunk)" stroke="var(--ink)" stroke-width="1.5"/><rect x="140" y="140" width="40" height="30" fill="var(--sunk)" stroke="var(--ink)" stroke-width="1.5"/>`;
   html+=`<path d="M152 ${200-(frac*0)} L168 ${200} L168 210 L152 210 Z" fill="var(--sunk)"/>`;
   const tip=170-(1-frac)*0; // needle tip y moves: closed 182 (in orifice), open 140
@@ -3224,7 +3541,7 @@ function drawEEV(){
   html+=`<rect x="154" y="90" width="12" height="${ty-90-14}" fill="var(--muted)"/><path d="M154 ${ty-14} L166 ${ty-14} L160 ${ty} Z" fill="var(--ink)"/>`;
   html+=`<rect x="146" y="178" width="28" height="8" fill="var(--bg)" stroke="var(--ink)"/>`;
   const flow=frac; if(flow>0.02){for(let i=0;i<5;i++){const x=40+((performance.now()/8+i*48)%240);html+=`<circle cx="${x}" cy="190" r="${2+flow*3}" fill="var(--b)" opacity="${x>160?flow:0.8}"/>`;}}
-  html+=`<text x="40" y="232" font-family="IBM Plex Mono" font-size="11" fill="var(--muted)">→ ${t('a15f')}</text>`;
+  html+=`<text x="40" y="232" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--muted)">→ ${t('a15f')}</text>`;
   s.innerHTML=html;
   $('eevSo').textContent=target;$('eevOut').textContent=Math.round(eevPos)+' / 480 · '+Math.round(frac*100)+'%';
 }
@@ -3251,16 +3568,29 @@ function buildMF(){
     b.onclick=()=>b.classList.toggle('open');g.appendChild(b);});
 }
 
+/* ---------- per-tab pause / continue ---------- */
+const PZ_TABS=['t1','t2','t3','t7','t9','t10','t11','t12','t14','t15'], PZ_KEYS={t1:['star'],t2:['dol'],t9:['soft'],t10:['start'],t14:['dis','vac']};
+const PZ={}; let domClock=0;
+function pzLabel(){document.querySelectorAll('.pz').forEach(b=>{const on=!!PZ[b.dataset.tab];b.textContent=t(on?'contA':'pause');b.setAttribute('aria-pressed',on);});}
+PZ_TABS.forEach(id=>{const sec=$(id);if(!sec)return;sec.querySelectorAll('.lab .tag').forEach(tag=>{
+  const b=document.createElement('button');b.type='button';b.className='btn pz';b.dataset.tab=id;b.onclick=()=>{PZ[id]=!PZ[id];pzLabel();};
+  const rp=tag.querySelector('[data-replay]');
+  if(rp){const g=document.createElement('span');g.className='tbtns';rp.replaceWith(g);g.appendChild(b);g.appendChild(rp);rp.addEventListener('click',()=>{PZ[id]=false;pzLabel();});}
+  else tag.appendChild(b);});});
+
 /* ---------- loop ---------- */
 let last=null, wph=0;
 function frame(now){
   const dt=last===null?0:Math.min(0.1,(now-last)/1000); last=now;
   const id=TABS[cur];
+  if(PZ[id]){(PZ_KEYS[id]||[]).forEach(k=>{if(anim[k]!=null)anim[k]+=dt*1000;});requestAnimationFrame(frame);return;}
+  domClock+=dt*1000;
   if(id==='t1') drawStar(now);
   if(id==='t2') drawDol(now);
+  if(id==='t3'){srTick(dt);drawSR();}
   if(id==='t3'){const {vr}=triacVals();const rps=vr<60?0:Math.min(1,(vr-40)/190)*1.6;fanAng=(fanAng+rps*360*dt)%360;$('fanBlades').setAttribute('transform',`rotate(${fanAng} 80 80)`);}
-  if(id==='t4'){const f=+$('freq').value;shaftAng=(shaftAng+(120*f/poles/60)/20*360*dt)%360;$('shaft').setAttribute('transform',`rotate(${shaftAng} 60 60)`);}
-  if(id==='t5'){wph+=dt*3;stageW(wph);}
+  if(id==='t4'){vfTick(dt);drawAff();}
+  if(id==='t5'&&t5Run){wph+=dt*3;stageW(wph);const f=+$('t5f').value;t5Ang=(t5Ang+30*f*0.96/60/20*360*dt)%360;$('t5shaft').setAttribute('transform',`rotate(${t5Ang.toFixed(1)} 60 60)`);}
   if(id==='t6'&&pwmRun){sweep=(sweep+dt/6)%1;drawPWM();}
   if(id==='t7'){m1Ang=(m1Ang+(+$('rpm').value)/60*360*dt)%360;setMotor(M1,m1Ang);}
   if(id==='t9') drawSoft(now);
@@ -3273,7 +3603,7 @@ function frame(now){
 }
 function redraw(){
   const now=performance.now();
-  drawTriac();drawVF();drawPWM();stageW(wph);$('rpm').oninput();m2Read();drawSix();calcs();drawEEV();
+  srUI();drawTriac();drawVF();drawAff();drawVfWave();if($('tachNeedle'))setTach(120*(+$('freq').value)/poles*0.96,0);$('t5f').oninput();drawPWM();stageW(wph);$('rpm').oninput();m2Read();drawSix();calcs();drawEEV();
   if(reduce){Object.keys(anim).forEach(k=>anim[k]=now-1e6);}
   drawStar(now);drawDol(now);drawSoft(now);drawStart(now);drawFOC();drawDis(now);drawVac(now);drawDom(now);
   if(M1){setMotor(M1,m1Ang);setMotor(M2,m2Ang);}
@@ -3283,7 +3613,7 @@ if(window.matchMedia) matchMedia('(prefers-color-scheme: dark)').addEventListene
 new MutationObserver(redraw).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 window.addEventListener('hashchange',()=>{const k=TABS.indexOf(location.hash.slice(1)); if(k>=0&&k!==cur) show(k,false);});
 
-M1=buildMotor('m1',1); M1.hall=$('hall'); M2=buildMotor('m2',2); buildSix(); m2Set('ac');
+buildSR(); buildTach(); M1=buildMotor('m1',1); M1.hall=$('hall'); M2=buildMotor('m2',2); buildSix(); m2Set('ac');
 const hk=TABS.indexOf((location.hash||'').slice(1)); if(hk>=0) cur=hk;
 apply(); show(cur,false);
 if(reduce) redraw(); else requestAnimationFrame(frame);
